@@ -1,0 +1,21 @@
+services:
+  api:
+    build: .
+    image: yatodocker1/flask-todo:v1.0.0
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: RootPass
+      MYSQL_DATABASE: tododb
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: AppPass
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
